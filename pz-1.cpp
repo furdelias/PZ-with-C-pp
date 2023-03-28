@@ -1,19 +1,18 @@
+#include <iostream>
 using namespace std;
 
-int main(void) {
-int vector[] = { 3, -5, 7, 10, -4, 14, 5, 2, -13 };
-int n = sizeof(vector) / sizeof(vector[0]);
-int *ptr = vector; // вказівник на перший елемент масиву
-int min_val = *ptr; // ініціалізуємо мінімальне значення першим елементом масиву
+int main() {
+    int vector[] = { 3, -5, 7, 10, -4, 14, 5, 2, -13 };
+    int n = sizeof(vector) / sizeof(vector[0]);
 
-// пройдемося по всім елементам масиву, порівнюючи їх з поточним мінімумом
-for (int i = 1; i < n; i++) {
-    if (*(ptr + i) < min_val) {
-        min_val = *(ptr + i);
+    int* max_ptr = vector; // вказівник на перший елемент масиву
+    for (int* p = vector + 1; p < vector + n; p++) { // проходимо по масиву вказівниками
+        if (*p > *max_ptr) { // порівнюємо значення, на які вказують вказівники
+            max_ptr = p; // оновлюємо вказівник на максимальний елемент
+        }
     }
-}
 
-cout << " 3 " << min_val << endl;
+    cout << "Найбільший елемент масиву: " << *max_ptr << endl;
 
-return 0;
+    return 0;
 }
