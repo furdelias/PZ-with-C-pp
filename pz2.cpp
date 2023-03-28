@@ -1,22 +1,58 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
-int main(void) {
-int matrix[10][10] = { };
-int *p = &matrix[0][0];
-  for (int i = 1; i <= 10; i++) {
-    for (int j = 1; j <= 10; j++) {
-        *p = i * j;
-        p++;
-    }
-}
+const int ROWS = 5;
+const int COLS = 5;
 
-for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-        cout.width(4);
-        cout << matrix[i][j];
+int main() {
+    int matrix[ROWS][COLS];
+
+    // заповнюємо масив випадковими числами
+    srand(time(NULL));
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            matrix[i][j] = rand() % 10;
+        }
+    }
+
+    // виводимо матрицю на екран
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // знаходимо елементи на головній діагоналі
+    cout << "Елементи на головній діагоналі: ";
+    for (int i = 0; i < ROWS; i++) {
+        cout << *((int*)(&matrix[i]) + i) << " ";
     }
     cout << endl;
-}
-return 0;
+
+    // знаходимо елементи на побічній діагоналі
+    cout << "Елементи на побічній діагоналі: ";
+    for (int i = 0; i < ROWS; i++) {
+        cout << *((int*)(&matrix[i]) + (COLS - i - 1)) << " ";
+    }
+    cout << endl;
+
+    // знаходимо кількість парних та непарних елементів масиву
+    int count_even = 0, count_odd = 0;
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (matrix[i][j] % 2 == 0) {
+                count_even++;
+            } else {
+                count_odd++;
+            }
+        }
+    }
+    cout << "Кількість парних елементів: " << count_even << endl;
+    cout << "Кількість непарних елементів: " << count_odd << endl;
+
+    return 0;
 }
