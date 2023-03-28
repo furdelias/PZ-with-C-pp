@@ -13,7 +13,7 @@ for (int i = 1; i < n; i++) {
     }
 }
 
-cout << "Найменший елемент масиву: " << min_val << endl;
+cout << " 3 " << min_val << endl;
 
 return 0;
 }
